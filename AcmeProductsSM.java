@@ -106,7 +106,7 @@ public class AcmeProductsSM
     	System.out.println("Using Retrieve Method");
     	System.out.println("Enter Product Name to Retrieve");
     	Scanner sc = new Scanner(System.in);
-    	String ProductName = sc.next().toLowerCase();//fixit to read all line
+    	String ProductName = sc.next().toLowerCase();
 
         int productIndex=-1;
     	for (int i=0; i < 1000; i++)
