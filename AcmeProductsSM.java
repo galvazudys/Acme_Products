@@ -27,11 +27,11 @@ public class AcmeProductsSM
     static  int reOrder = 0;
     static  String productDetail="";
 
-
+	//Main method
     public static void main(String[] args)
     {
 
-		// Initialise product arrays
+		// Initialise product arrays for testing 
     	productId[0] = "1";
     	productName[0] = "Dining Chair";
     	productDescription[0] = "Oak Dining Chair";
@@ -71,11 +71,12 @@ public class AcmeProductsSM
         while (option.equals("1") || option.equals("2") || option.equals("3") || option.equals("4") || option.equals("5") || option.equals("6"));
     }
 
+	//main menu method
     public static String menu()
     {
     	System.out.println("Acme Products");
     	System.out.println("");
-    	System.out.println("1. Retrieve an existing product detals by name");
+    	System.out.println("1. Retrieve an existing product details by name");
     	System.out.println("2. Input new product details.");
     	System.out.println("3. Edit and existing product details");
     	System.out.println("4. Check for any stock at/below reorder level.");
@@ -84,6 +85,7 @@ public class AcmeProductsSM
     	System.out.println("Press any other key to exit");
     	Scanner sc = new Scanner(System.in);
 
+		//after taking input from user its calls method from option.
     	String Option = sc.nextLine();
     	if (Option.equals("1"))
     		Retrieve();
@@ -101,6 +103,7 @@ public class AcmeProductsSM
     	return Option;
     }
 
+	//option 1 method
     public static int Retrieve()
     {
     	System.out.println("Using Retrieve Method");
@@ -111,6 +114,12 @@ public class AcmeProductsSM
         int productIndex=-1;
     	for (int i=0; i < 1000; i++)
     	{
+			//check or product exist, if not display message for user
+			if(productName[i] == null)
+			{
+				System.out.println("No Product Present! Try Again..");
+				break;
+			}
     		if (productName[i].toLowerCase().equals(ProductName))
     		{
             	System.out.println("Product Id:" + productId[i]);
@@ -126,6 +135,7 @@ public class AcmeProductsSM
     	return productIndex;
     }
 
+	//Option 2 method
     public static void InputNew()
     {
     	System.out.println("In InputNew Method");
@@ -139,6 +149,7 @@ public class AcmeProductsSM
                 break;
             }
         }
+		//find item index in array
         int itemId=Arrays.asList(productName).indexOf(product);
 
         //ID
@@ -163,12 +174,13 @@ public class AcmeProductsSM
         reOrderLevel[itemId] = reOrder;
 
         //price
-        System.out.println("ENter PRice: ");
+        System.out.println("Enter Price: ");
         price = sc.nextFloat();
         productPrice[itemId]=price;
 
     }
 
+	//option 3 method
     public static void EditExisting()
     {
     	System.out.println("In EditExisting Method");
@@ -181,7 +193,8 @@ public class AcmeProductsSM
         System.out.println("d) Product Price:" + productPrice[i]);
         System.out.println("e) Product Stock Level:" + stockLevel[i]);
         System.out.println("f) Product Re-Order Level:" + reOrderLevel[i]);
-
+		
+		//checks for option from user and takes input of new value 
     	productDetail=sc.nextLine();
         if (productDetail.equals("a"))
     	{
@@ -216,6 +229,7 @@ public class AcmeProductsSM
     	}
     }
 
+	//Option 4 mothod
     public static void ReOrderLevels()
     {
     	System.out.println("In ReOrderLevels Method");
@@ -223,6 +237,7 @@ public class AcmeProductsSM
         int countBelowStock=0;
     	for (int i=0; i < 1000; i++)
     	{
+			//checks or any value lower then re-order level
     		if (stockLevel[i]<reOrderLevel[i])
     		{
             	System.out.println("Product Id:" + productId[i]);
@@ -240,6 +255,7 @@ public class AcmeProductsSM
     	}
     }
 
+	//option 5 method
     public static void StockLevelByName()
     {
     	System.out.println("In StockLevelByName Method");
@@ -251,31 +267,49 @@ public class AcmeProductsSM
 
     	for (int i=0; i < 1000; i++)
     	{
+
+			if(productName[i] == null)
+			{
+				//check or product exist, if not display message for user
+				System.out.println("No Product Present! Try Again..");
+				break;
+			}			
     		if (productName[i].toLowerCase().equals(ProductName))
     		{
+				//if exist,it's loops and finds product and calc and prints				
 				System.out.println("Product Stock Level for "+ productName[i] +(" is: ") + stockLevel[i]);
             	sc.nextLine();
 			 	break;
     		}
     	}
     }
+
+//Option 6 method
 	public static void StockValue()
     {
     	System.out.println("In StockValue Method");
     	System.out.println("Please enter product :");
-
+		
     	Scanner sc = new Scanner(System.in);
     	String ProductName = sc.next().toLowerCase();
 
 
     	for (int i=0; i < 1000; i++)
     	{
-    		if (productName[i].toLowerCase().equals(ProductName))
+			//check or product exist, if not display message for user
+			if(productName[i] == null)
+			{
+				System.out.println("No Product Present! Try Again..");
+				break;
+			}
+    		if (productName[i].toLowerCase().equals(ProductName)) 
     		{
+				//if exist,it's loops and finds product and calc and prints
 				System.out.println("Product Stock Value for "+ productName[i] +(" is: ") + (" ")+stockLevel[i]*productPrice[i]);
             	sc.nextLine();
 			 	break;
     		}
+
     	}
     }
 }
